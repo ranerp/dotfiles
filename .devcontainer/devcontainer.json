@@ -1,5 +1,5 @@
 {
-    "name": "uv",
+    "name": "Development Environment",
     "build": {
         "context": "..",
         "dockerfile": "Dockerfile",
