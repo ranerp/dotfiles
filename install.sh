@@ -71,16 +71,16 @@ fi
 
 # Install plugins
 plugins=(
-    "zsh-autosuggestions:https://github.com/zsh-users/zsh-autosuggestions"
-    "zsh-syntax-highlighting:https://github.com/zsh-users/zsh-syntax-highlighting.git"
-    "fzf-zsh-plugin:https://github.com/unixorn/fzf-zsh-plugin.git"
-    "fzf-tab:https://github.com/Aloxaf/fzf-tab"
-    "zsh-bat:https://github.com/fdellwing/zsh-bat.git"
+    "zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions"
+    "zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    "fzf-zsh-plugin https://github.com/unixorn/fzf-zsh-plugin.git"
+    "fzf-tab https://github.com/Aloxaf/fzf-tab"
+    "zsh-bat https://github.com/fdellwing/zsh-bat.git"
 )
 
 for plugin in "${plugins[@]}"; do
-    plugin_name="${plugin%%:*}"
-    plugin_url="${plugin##*:}"
+    plugin_name="${plugin%% *}"
+    plugin_url="${plugin##* }"
     plugin_dir="$HOME/.oh-my-zsh/custom/plugins/$plugin_name"
     
     if [ ! -d "$plugin_dir" ]; then
