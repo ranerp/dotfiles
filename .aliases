@@ -83,6 +83,11 @@ alias j="jobs"
 alias c="clear"
 alias e="exit"
 
+# Add jq for JSON processing
+# Add yq for YAML processing
+alias json='jq .'
+alias yaml='yq .'
+
 # Cat
 alias catp='bat --style=plain --paging=never'  # Plain cat with no paging
 alias catall='bat --paging=never'              # bat with syntax highlighting, no paging
