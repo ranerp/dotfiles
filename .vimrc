@@ -121,6 +121,88 @@ vnoremap > >gv
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
 vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR># Dotfiles Repository Structure
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
-## Repository Layout
+" Search and replace
+nnoremap <leader>s :%s//g<Left><Left>
+vnoremap <leader>s :s//g<Left><Left>
+
+" Status line
+set laststatus=2              " Always show status line
+set statusline=%f             " Filename
+set statusline+=%m            " Modified flag
+set statusline+=%r            " Readonly flag
+set statusline+=%h            " Help flag
+set statusline+=%w            " Preview flag
+set statusline+=%=            " Right align
+set statusline+=%y            " File type
+set statusline+=\ [%{&ff}]    " File format
+set statusline+=\ [%{&fenc}]  " File encoding
+set statusline+=\ %p%%        " Percentage through file
+set statusline+=\ %l:%c       " Line and column
+
+" Auto commands
+augroup vimrc_autocmds
+    autocmd!
+    " Remove trailing whitespace on save
+    autocmd BufWritePre * :%s/\s\+$//e
+    
+    " Return to last edit position when opening files
+    autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
+    
+    " Auto-resize splits when window is resized
+    autocmd VimResized * :wincmd =
+    
+    " Highlight TODO, FIXME, NOTE, etc.
+    autocmd Syntax * call matchadd('Todo', '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|NOTE\)')
+augroup END
+
+" File type specific settings
+augroup file_types
+    autocmd!
+    autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2
+    autocmd FileType json setlocal ts=2 sts=2 sw=2
+    autocmd FileType javascript,typescript setlocal ts=2 sts=2 sw=2
+    autocmd FileType html,css setlocal ts=2 sts=2 sw=2
+    autocmd FileType sh,bash,zsh setlocal ts=2 sts=2 sw=2
+    autocmd FileType python setlocal ts=4 sts=4 sw=4
+    autocmd FileType go setlocal ts=4 sts=4 sw=4 noexpandtab
+    autocmd FileType make setlocal ts=4 sts=4 sw=4 noexpandtab
+augroup END
+
+" Simple color scheme (works without plugins)
+if has("termguicolors")
+    set termguicolors
+endif
+
+" Better colors for dark terminals
+highlight Normal ctermfg=252 ctermbg=none
+highlight LineNr ctermfg=240 ctermbg=none
+highlight CursorLineNr ctermfg=yellow ctermbg=none
+highlight CursorLine cterm=none ctermbg=237
+highlight Visual ctermbg=238
+highlight Search ctermfg=black ctermbg=yellow
+highlight IncSearch ctermfg=black ctermbg=red
+highlight MatchParen ctermfg=black ctermbg=magenta
+
+" Function to toggle between relative and absolute line numbers
+function! ToggleLineNumbers()
+    if &relativenumber
+        set norelativenumber
+        set number
+    else
+        set relativenumber
+    endif
+endfunction
+nnoremap <leader>ln :call ToggleLineNumbers()<CR>
+
+" Function to strip trailing whitespace
+function! StripTrailingWhitespace()
+    let save_cursor = getpos(".")
+    %s/\s\+$//e
+    call setpos('.', save_cursor)
+endfunction
+nnoremap <leader>sw :call StripTrailingWhitespace()<CR>
