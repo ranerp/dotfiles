@@ -6,11 +6,21 @@ alias .....="cd ../../../.."
 alias ~="cd ~"
 alias -- -="cd -"
 
-# ls aliases
-alias l="ls -lah"
-alias ll="ls -lh"
-alias la="ls -lAh"
-alias ls="ls --color=auto"
+# ls aliases with eza (modern ls replacement)
+if command -v eza &> /dev/null; then
+    alias ls="eza --icons --group-directories-first"
+    alias ll="eza -la --icons --group-directories-first --git"
+    alias la="eza -la --icons --group-directories-first"
+    alias l="eza -l --icons --group-directories-first"
+    alias lt="eza --tree --icons --level=2"
+    alias llt="eza --tree --icons --long --level=3"
+else
+    # Fallback to standard ls if eza not available
+    alias l="ls -lah"
+    alias ll="ls -lh"
+    alias la="ls -lAh"
+    alias ls="ls --color=auto"
+fi
 
 # Better cat with bat
 if command -v bat &> /dev/null; then
