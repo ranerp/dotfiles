@@ -125,3 +125,8 @@ localip() {
 path() {
     echo $PATH | tr ':' '\n'
 }
+
+# Add to .functions
+..() { cd ..; }
+...() { cd ../..; }
+....() { cd ../../..; }
