@@ -83,3 +83,6 @@ export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30
 if command -v direnv &> /dev/null; then
     eval "$(direnv hook zsh)"
 fi
+
+# Load fzf key bindings
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
