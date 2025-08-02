@@ -126,11 +126,6 @@ path() {
     echo $PATH | tr ':' '\n'
 }
 
-# Back navigation
-..() { cd ..; }
-...() { cd ../..; }
-....() { cd ../../..; }
-
 # System information
 sysinfo() {
     echo "System: $(uname -a)"
