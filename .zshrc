@@ -67,7 +67,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Enable completion for kubectl
 if command -v kubectl &> /dev/null; then
-    source <(kubectl completion zsh)
+    source <(kubectl completion zsh) 2>/dev/null || true
     # Alias k to kubectl for faster typing
     alias k=kubectl
     complete -F __start_kubectl k
