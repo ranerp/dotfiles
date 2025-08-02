@@ -111,6 +111,24 @@ git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 ```
 
+### Running on remote server
+
+```bash
+ssh user@server 'curl -fsSL https://raw.githubusercontent.com/ranerp/dotfiles/main/remote-setup.sh | bash'
+```
+
+#### For frequent use
+
+Add ~/.ssh/config
+
+```text
+Host myserver
+    HostName some.domain.com
+    User myuser
+    ForwardAgent yes
+    RemoteCommand "cd ~/.dotfiles && git pull && exec zsh"
+```
+
 ### Environment Variables
 Customize `.exports` for your preferences:
 - `BAT_THEME`: Color theme for bat
