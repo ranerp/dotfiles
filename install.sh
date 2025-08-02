@@ -78,6 +78,23 @@ install_nerd_fonts() {
     print_info "Note: Configure your terminal to use 'MesloLGS NF' font for best experience"
 }
 
+
+install_fzf_shell_integration() {
+    print_info "Installing fzf with shell integration..."
+    
+    if [ ! -d "$HOME/.fzf" ]; then
+        # Clone fzf repository
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        
+        # Install fzf with shell integration
+        ~/.fzf/install --key-bindings --completion --no-update-rc
+        
+        print_success "fzf installed with shell integration"
+    else
+        print_info "fzf already installed"
+    fi
+}
+
 # Create symlinks for dotfiles
 files=(".zshrc" ".p10k.zsh" ".gitconfig" ".aliases" ".functions" ".exports")
 
@@ -98,6 +115,9 @@ fi
 
 # Install Nerd Fonts
 install_nerd_fonts
+
+# Install fzf shell integration
+install_fzf_shell_integration
 
 # Install Powerlevel10k theme
 if [ ! -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]; then
