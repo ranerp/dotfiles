@@ -93,3 +93,6 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 
 # Kubernetes
 export KUBE_EDITOR="$EDITOR"
+
+# Terminal configuration
+export TERM=xterm-256color
