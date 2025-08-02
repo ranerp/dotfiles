@@ -192,6 +192,9 @@ install_fzf_shell_integration
 # Install eza
 install_eza
 
+# Setup global gitignore
+setup_global_gitignore
+
 # Install Powerlevel10k theme
 if [ ! -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]; then
     print_info "Installing Powerlevel10k theme..."
