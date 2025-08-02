@@ -152,6 +152,16 @@ install_eza() {
     fi
 }
 
+# Setup global gitignore
+setup_global_gitignore() {
+    print_info "Setting up global gitignore..."
+    cp .gitignore_global ~/
+    
+    # Configure git to use it
+    git config --global core.excludesfile ~/.gitignore_global
+    print_success "Global gitignore configured"
+}
+
 # Create symlinks for dotfiles
 files=(".zshrc" ".p10k.zsh" ".gitconfig" ".aliases" ".functions" ".exports" ".tmux.conf" ".vimrc")
 
