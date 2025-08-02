@@ -126,7 +126,15 @@ path() {
     echo $PATH | tr ':' '\n'
 }
 
-# Add to .functions
+# Back navigation
 ..() { cd ..; }
 ...() { cd ../..; }
 ....() { cd ../../..; }
+
+# System information
+sysinfo() {
+    echo "System: $(uname -a)"
+    echo "Uptime: $(uptime)"
+    echo "Memory: $(free -h 2>/dev/null || vm_stat)"
+    echo "Disk: $(df -h . | tail -1)"
+}
