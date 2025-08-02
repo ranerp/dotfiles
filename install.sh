@@ -125,8 +125,35 @@ install_fzf_shell_integration() {
     fi
 }
 
+# Install eza (modern ls replacement)
+install_eza() {
+    print_info "Installing eza (modern ls replacement)..."
+    
+    # Detect architecture
+    ARCH=$(uname -m)
+    case $ARCH in
+        x86_64) EZA_ARCH="x86_64" ;;
+        aarch64|arm64) EZA_ARCH="aarch64" ;;
+        *) EZA_ARCH="x86_64" ;;
+    esac
+    
+    # Get latest eza release
+    EZA_VERSION=$(curl -s https://api.github.com/repos/eza-community/eza/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    
+    if [ -n "$EZA_VERSION" ]; then
+        cd /tmp
+        wget -q "https://github.com/eza-community/eza/releases/download/${EZA_VERSION}/eza_${EZA_ARCH}-unknown-linux-gnu.tar.gz"
+        tar -xzf "eza_${EZA_ARCH}-unknown-linux-gnu.tar.gz"
+        sudo mv eza /usr/local/bin/
+        rm -f "eza_${EZA_ARCH}-unknown-linux-gnu.tar.gz"
+        print_success "eza installed (${EZA_VERSION})"
+    else
+        print_error "Failed to get eza version"
+    fi
+}
+
 # Create symlinks for dotfiles
-files=(".zshrc" ".p10k.zsh" ".gitconfig" ".aliases" ".functions" ".exports")
+files=(".zshrc" ".p10k.zsh" ".gitconfig" ".aliases" ".functions" ".exports" ".tmux.conf" ".vimrc")
 
 for file in "${files[@]}"; do
     if [ -f "$DOTFILES_DIR/$file" ]; then
@@ -151,6 +178,9 @@ install_k9s
 
 # Install fzf shell integration
 install_fzf_shell_integration
+
+# Install eza
+install_eza
 
 # Install Powerlevel10k theme
 if [ ! -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]; then
