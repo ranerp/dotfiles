@@ -85,8 +85,8 @@ alias e="exit"
 
 # Add jq for JSON processing
 # Add yq for YAML processing
-alias json='jq .'
-alias yaml='yq .'
+alias jsonpp='jq .'     # "json pretty print"
+alias yamlpp='yq .'     # "yaml pretty print"
 
 # Cat
 alias catp='bat --style=plain --paging=never'  # Plain cat with no paging
