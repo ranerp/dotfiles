@@ -96,3 +96,4 @@ export KUBE_EDITOR="$EDITOR"
 
 # Terminal configuration
 export TERM=xterm-256color
+export COLORTERM=truecolor
