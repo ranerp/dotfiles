@@ -152,11 +152,38 @@ install_eza() {
     fi
 }
 
+setup_eza_themes() {
+    print_info "Setting up eza themes..."
+    
+    THEMES_DIR="$HOME/.oh-my-zsh/custom/eza-themes"
+    
+    if [ ! -d "$THEMES_DIR" ]; then
+        print_info "Cloning eza themes repository..."
+        git clone https://github.com/eza-community/eza-themes.git "$THEMES_DIR"
+        print_success "eza themes cloned"
+    else
+        print_info "eza themes already exist"
+    fi
+    
+    mkdir -p ~/.config/eza
+    
+    # Use onedark theme if available, fallback to default
+    if [ -f "$THEMES_DIR/themes/onedark.yml" ]; then
+        ln -sf "$THEMES_DIR/themes/onedark.yml" ~/.config/eza/theme.yml
+        print_success "eza onedark theme configured"
+    elif [ -f "$THEMES_DIR/themes/default.yml" ]; then
+        ln -sf "$THEMES_DIR/themes/default.yml" ~/.config/eza/theme.yml
+        print_success "eza default theme configured"
+    else
+        print_error "eza themes not found"
+    fi
+}
+
 # Setup global gitignore
 setup_global_gitignore() {
     print_info "Setting up global gitignore..."
     cp .gitignore_global ~/
-    
+
     # Configure git to use it
     git config --global core.excludesfile ~/.gitignore_global
     print_success "Global gitignore configured"
@@ -192,6 +219,9 @@ install_fzf_shell_integration
 # Install eza
 install_eza
 
+# Setup eza themes
+setup_eza_themes
+
 # Setup global gitignore
 setup_global_gitignore
 
@@ -217,7 +247,7 @@ for plugin in "${plugins[@]}"; do
     plugin_name="${plugin%% *}"
     plugin_url="${plugin##* }"
     plugin_dir="$HOME/.oh-my-zsh/custom/plugins/$plugin_name"
-    
+
     if [ ! -d "$plugin_dir" ]; then
         print_info "Installing $plugin_name plugin..."
         git clone "$plugin_url" "$plugin_dir"
