@@ -168,8 +168,8 @@ setup_eza_themes() {
     mkdir -p ~/.config/eza
     
     # Use onedark theme if available, fallback to default
-    if [ -f "$THEMES_DIR/themes/onedark.yml" ]; then
-        ln -sf "$THEMES_DIR/themes/onedark.yml" ~/.config/eza/theme.yml
+    if [ -f "$THEMES_DIR/themes/one_dark.yml" ]; then
+        ln -sf "$THEMES_DIR/themes/one_dark.yml" ~/.config/eza/theme.yml
         print_success "eza onedark theme configured"
     elif [ -f "$THEMES_DIR/themes/default.yml" ]; then
         ln -sf "$THEMES_DIR/themes/default.yml" ~/.config/eza/theme.yml
