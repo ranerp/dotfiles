@@ -24,6 +24,16 @@ plugins=(
     colored-man-pages
     history-substring-search
     copypath
+    zsh-completions
+    z
+    docker
+    docker-compose
+    npm
+    pip
+    rust
+    terraform
+    aws
+    helm
 )
 
 # Load Oh My Zsh
