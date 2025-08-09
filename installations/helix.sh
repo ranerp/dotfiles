@@ -53,10 +53,10 @@ setup_helix_config() {
     mkdir -p ~/.config/helix
 
     # Create symlink to config file
-    if [ -f "$DOTFILES_DIR/config.toml" ]; then
+    if [ -f "$DOTFILES_DIR/helix-config.toml" ]; then
         create_symlink "$DOTFILES_DIR/helix-config.toml" "$HOME/.config/helix/config.toml"
         print_success "Helix configuration linked"
     else
-        print_error "Helix config file not found in dotfiles"
+        print_error "Helix config file not found: $DOTFILES_DIR/helix-config.toml"
     fi
 }
