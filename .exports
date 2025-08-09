@@ -1,5 +1,11 @@
-# Make vim the default editor
-export EDITOR='vim'
+# Set default editor with priority: helix > nvim > vim
+if command -v hx &> /dev/null; then
+    export EDITOR='hx'
+elif command -v nvim &> /dev/null; then
+    export EDITOR='nvim'
+else
+    export EDITOR='vim'
+fi
 
 # Language
 export LC_ALL='en_US.UTF-8'

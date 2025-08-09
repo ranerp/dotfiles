@@ -1,0 +1,82 @@
+theme = "onedark"
+
+[editor]
+line-number = "relative"
+mouse = true
+scrolloff = 5
+shell = ["zsh", "-c"]
+completion-trigger-len = 2
+auto-completion = true
+auto-format = true
+auto-save = false
+idle-timeout = 400
+completion-timeout = 5
+preview-completion-insert = true
+color-modes = true
+
+[editor.statusline]
+left = ["mode", "spacer", "file-name", "file-modification-indicator"]
+center = []
+right = ["diagnostics", "selections", "register", "position", "file-encoding"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.lsp]
+display-messages = true
+auto-signature-help = true
+display-inlay-hints = true
+display-signature-help-docs = true
+snippets = true
+goto-reference-include-declaration = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+follow-symlinks = true
+deduplicate-links = true
+parents = true
+ignore = true
+git-ignore = true
+git-global = true
+git-exclude = true
+
+[editor.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+'<' = '>'
+
+[editor.search]
+smart-case = true
+wrap-around = true
+
+[editor.whitespace]
+render = "none"
+characters = { space = "·", nbsp = "⍽", tab = "→", newline = "⏎", tabpad = "·" }
+
+[editor.indent-guides]
+render = true
+character = "│"
+skip-levels = 1
+
+[keys.normal]
+# Quick save
+C-s = ":w"
+# Quick quit
+C-q = ":q"
+# Format document
+"space" = { f = ":format" }
+
+[keys.insert]
+# Quick save in insert mode
+C-s = ["normal_mode", ":w", "insert_mode"]
+# Exit insert mode
+j = { k = "normal_mode" }
