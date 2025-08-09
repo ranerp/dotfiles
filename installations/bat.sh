@@ -55,7 +55,7 @@ install_bat_from_github() {
     BAT_VERSION=$(curl -s https://api.github.com/repos/sharkdp/bat/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/^v//')
 
     if [ -n "$BAT_VERSION" ]; then
-        cd /tmp
+        cd /tmp || exit
 
         if [ "$os_type" = "macos" ]; then
             wget -q "https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat-v${BAT_VERSION}-${BAT_ARCH}-apple-darwin.tar.gz"

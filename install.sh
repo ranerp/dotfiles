@@ -1,23 +1,5 @@
 #!/bin/bash
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
-
-print_success() {
-    echo -e "${GREEN}✓${NC} $1"
-}
-
-print_error() {
-    echo -e "${RED}✗${NC} $1"
-}
-
-print_info() {
-    echo -e "${YELLOW}ℹ${NC} $1"
-}
-
 # Get the directory where this script is located
 DOTFILES_DIR="$PWD"
 if [ ! -f "$DOTFILES_DIR/install.sh" ]; then
@@ -25,9 +7,23 @@ if [ ! -f "$DOTFILES_DIR/install.sh" ]; then
   exit 1
 fi
 
+# Source installation scripts explicitly
+source "$DOTFILES_DIR/installations/utils.sh"
+source "$DOTFILES_DIR/installations/create-symlink.sh"
+source "$DOTFILES_DIR/installations/fonts.sh"
+source "$DOTFILES_DIR/installations/k9s.sh"
+source "$DOTFILES_DIR/installations/fzf-shell-integration.sh"
+source "$DOTFILES_DIR/installations/eza.sh"
+source "$DOTFILES_DIR/installations/bat.sh"
+source "$DOTFILES_DIR/installations/helix.sh"
+source "$DOTFILES_DIR/installations/ohmyzsh.sh"
+source "$DOTFILES_DIR/installations/powerlevel10k.sh"
+source "$DOTFILES_DIR/installations/setup-global-gitignore.sh"
+
 print_info "Installing dotfiles from $DOTFILES_DIR"
 
 # Create symlinks for dotfiles
+print_info "Setting up dotfiles symlinks..."
 files=(".zshrc" ".p10k.zsh" ".gitconfig" ".aliases" ".functions" ".exports" ".tmux.conf" ".vimrc")
 
 for file in "${files[@]}"; do
@@ -36,32 +32,78 @@ for file in "${files[@]}"; do
     fi
 done
 
+# Installation configuration - set to false to disable
+declare -A INSTALL_CONFIG=(
+    ["k9s"]=true
+    ["fzf"]=true
+    ["eza"]=true
+    ["bat"]=true
+    ["helix"]=true
+    ["ohmyzsh"]=true
+    ["powerlevel10k"]=true
+    ["fonts"]=true            # powerlevel10k depends on the NerdFonts to render correctly. Same can be said about EZA
+)
+
+# Install Oh My Zsh first (required for themes/plugins)
+if [ "${INSTALL_CONFIG["ohmyzsh"]}" = "true" ]; then
+    install_ohmyzsh
+else
+    print_info "Skipping Oh My Zsh (disabled)"
+fi
+
 # Install Nerd Fonts
-install_nerd_fonts
+if [ "${INSTALL_CONFIG["fonts"]}" = "true" ]; then
+    install_nerd_fonts
+else
+    print_info "Skipping Nerd Fonts (disabled)"
+fi
 
 # Install k9s
-install_k9s
+if [ "${INSTALL_CONFIG["k9s"]}" = "true" ]; then
+    install_k9s
+else
+    print_info "Skipping k9s (disabled)"
+fi
 
-# Install fzf shell integration
-install_fzf_shell_integration
+# Install fzf
+if [ "${INSTALL_CONFIG["fzf"]}" = "true" ]; then
+    install_fzf_shell_integration
+else
+    print_info "Skipping fzf (disabled)"
+fi
 
 # Install eza
-install_eza
-
-# Setup eza themes
-setup_eza_themes
+if [ "${INSTALL_CONFIG["eza"]}" = "true" ]; then
+    install_eza
+    setup_eza_themes
+else
+    print_info "Skipping eza (disabled)"
+fi
 
 # Install bat
-install_bat
+if [ "${INSTALL_CONFIG["bat"]}" = "true" ]; then
+    install_bat
+else
+    print_info "Skipping bat (disabled)"
+fi
 
-# Install Helix editor
-install_helix
+# Install Helix
+if [ "${INSTALL_CONFIG["helix"]}" = "true" ]; then
+    install_helix
+    setup_helix_config
+else
+    print_info "Skipping Helix (disabled)"
+fi
 
-# Setup Helix config
-setup_helix_config
-
-# Setup global gitignore
+# Setup configurations
 setup_global_gitignore
+
+# Install Powerlevel10k theme
+if [ "${INSTALL_CONFIG["powerlevel10k"]}" = "true" ]; then
+    install_powerlevel10k
+else
+    print_info "Skipping Powerlevel10k (disabled)"
+fi
 
 # Install plugins
 plugins=(

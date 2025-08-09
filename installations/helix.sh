@@ -22,7 +22,7 @@ install_helix() {
     HELIX_VERSION=$(curl -s https://api.github.com/repos/helix-editor/helix/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 
     if [ -n "$HELIX_VERSION" ]; then
-        cd /tmp
+        cd /tmp || exit
 
         if [ "$HELIX_OS" = "macos" ]; then
             wget -q "https://github.com/helix-editor/helix/releases/download/${HELIX_VERSION}/helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}.tar.xz"

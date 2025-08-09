@@ -14,10 +14,13 @@ install_eza() {
     EZA_VERSION=$(curl -s https://api.github.com/repos/eza-community/eza/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 
     if [ -n "$EZA_VERSION" ]; then
-        cd /tmp
+        cd /tmp || exit
+
         wget -q "https://github.com/eza-community/eza/releases/download/${EZA_VERSION}/eza_${EZA_ARCH}-unknown-linux-gnu.tar.gz"
+
         tar -xzf "eza_${EZA_ARCH}-unknown-linux-gnu.tar.gz"
         sudo mv eza /usr/local/bin/
+
         rm -f "eza_${EZA_ARCH}-unknown-linux-gnu.tar.gz"
         print_success "eza installed (${EZA_VERSION})"
     else

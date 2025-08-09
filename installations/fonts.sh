@@ -6,7 +6,7 @@ install_nerd_fonts() {
     mkdir -p ~/.local/share/fonts
 
     # Download MesloLGS NF (recommended by Powerlevel10k)
-    cd /tmp
+    cd /tmp || exit
 
     fonts=(
         "MesloLGS%20NF%20Regular.ttf"

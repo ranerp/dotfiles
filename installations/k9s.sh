@@ -15,7 +15,7 @@ install_k9s() {
         K9S_VERSION=$(curl -s https://api.github.com/repos/derailed/k9s/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 
         if [ -n "$K9S_VERSION" ]; then
-            cd /tmp
+            cd /tmp || exit
             wget -q "https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_${K9S_ARCH}.tar.gz"
             tar -xzf "k9s_Linux_${K9S_ARCH}.tar.gz"
             sudo mv k9s /usr/local/bin/
