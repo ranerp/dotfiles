@@ -5,7 +5,7 @@ Personal configuration files for my development environment.
 ## Features
 - **Zsh** with Oh My Zsh
 - **Powerlevel10k** theme with auto-configuration (no wizard needed!)
-- **Plugins**: git, zsh-autosuggestions, zsh-syntax-highlighting, kubectl, fzf-zsh-plugin, fzf-tab, zsh-bat
+- **Plugins**: git, zsh-autosuggestions, zsh-syntax-highlighting, kubectl, fzf-zsh-plugin, fzf-tab, zsh-bat, you-should-use, colored-man-pages, history-substring-search, copypath, zsh-completions, z
 - **Tools**: bat, fzf (upstream version), kubectl
 - **Git** configuration with useful aliases
 - **Nerd Fonts** (MesloLGS NF) automatically installed
@@ -22,34 +22,78 @@ chmod +x install.sh
 ```
 
 ### With DevContainers
+
 This repository includes a complete devcontainer configuration in `.devcontainer/`:
 
-**For VS Code:**
-1. Install the "Dev Containers" extension
-2. Open this repository in VS Code
-3. Click "Reopen in Container" when prompted
-4. Everything will be automatically set up!
+#### VS Code Setup
+1. **Install Prerequisites:**
+   - Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+   - Install the ["Dev Containers" extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) in VS Code
 
-**For PyCharm:**
-1. Configure Docker/DevContainer support
-2. Use the included `devcontainer.json` configuration
-3. The dotfiles will be automatically installed
+2. **Open in Container:**
+   ```bash
+   # Clone any project (doesn't need to include dotfiles)
+   git clone https://github.com/yourproject/repo.git
+   cd repo
+   
+   # Copy the .devcontainer folder from this dotfiles repo
+   curl -L https://github.com/ranerp/dotfiles/archive/main.zip | tar -xz --strip=1 dotfiles-main/.devcontainer
+   
+   # Open in VS Code
+   code .
+   ```
+   - VS Code will detect the devcontainer configuration
+   - Click "Reopen in Container" when prompted  
+   - Wait for the container to build and dotfiles to install (~5-8 minutes first time)
+   - Your dotfiles will be automatically cloned and configured!
 
-**Manual devcontainer usage:**
+#### PyCharm Setup
+1. **Install Prerequisites:**
+   - Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+   - Enable Docker plugin in PyCharm
+
+2. **Configure DevContainer:**
+   ```bash
+   git clone https://github.com/yourusername/dotfiles.git
+   cd dotfiles
+   ```
+   - Open PyCharm → File → Open → Select the dotfiles folder
+   - Go to Settings → Build, Execution, Deployment → Docker
+   - Add Docker server (usually auto-detected)
+   - Go to Settings → Build, Execution, Deployment → Remote Development
+   - Create new SSH configuration using the devcontainer
+
+#### Manual Docker Usage
 ```bash
-# Clone and use the devcontainer
+# Clone the repository
 git clone https://github.com/yourusername/dotfiles.git
 cd dotfiles
-# Use with your preferred devcontainer-compatible tool
+
+# Build and run the devcontainer
+docker build -f .devcontainer/Dockerfile -t my-dotfiles .
+docker run -it --rm -v "$(pwd)":/workspaces/dotfiles -v /var/run/docker.sock:/var/run/docker.sock my-dotfiles
+
+# Or use docker-compose for easier management
+cd .devcontainer
+docker-compose up -d
+docker exec -it dotfiles_devcontainer zsh
+
+# When done
+docker-compose down
+
+# Inside container, dotfiles are already installed and configured!
 ```
 
-### With Docker
+#### DevContainer CLI (devcontainer/cli)
 ```bash
-# Use the devcontainer configuration
-docker run -it --rm -v "$(pwd)":/workspaces/project mcr.microsoft.com/devcontainers/base:ubuntu
-# Inside container:
-git clone https://github.com/ranerp/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles && chmod +x install.sh && ./install.sh
+# Install devcontainer CLI
+npm install -g @devcontainers/cli
+
+# Build and open the devcontainer
+git clone https://github.com/yourusername/dotfiles.git
+cd dotfiles
+devcontainer up --workspace-folder .
+devcontainer exec --workspace-folder . zsh
 ```
 
 ## What's Included
@@ -65,11 +109,13 @@ cd ~/.dotfiles && chmod +x install.sh && ./install.sh
 - **fzf**: Fuzzy finder with full shell integration (installed from source)
 - **bat**: Better `cat` with syntax highlighting
 - **kubectl**: Kubernetes CLI with completion and aliases
+- **Helix**: Modern modal text editor with LSP support
 
 ### Git Configuration
 - Useful aliases (st, co, br, etc.)
 - No email configured globally (set per repository as needed)
-- Better diff and merge tools
+- Helix configured as default editor and diff/merge tool
+- OneDark color scheme for git output
 - Global gitignore patterns
 
 ### DevContainer Features
@@ -84,7 +130,11 @@ cd ~/.dotfiles && chmod +x install.sh && ./install.sh
   - `Ctrl+R`: Fuzzy command history search
   - `Ctrl+T`: File finder
   - `Alt+C`: Directory navigation
-- **Enhanced tab completion** with fuzzy search
+- **Enhanced tab completion** with fuzzy search via fzf-tab
+- **Smart directory jumping** with `z` plugin
+- **Alias reminders** with `you-should-use` plugin
+- **History substring search** with Up/Down arrows
+- **Comprehensive completions** for Docker, npm, pip, terraform, aws, gcloud, helm
 - **Git aliases**: `gst`, `gco`, `gp`, `gl`, etc.
 - **Kubectl aliases**: `k`, `kgp`, `kgs`, etc.
 

@@ -1,0 +1,24 @@
+services:
+  devcontainer:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: dotfiles_devcontainer
+    volumes:
+      - ..:/workspaces/project:cached
+      - /var/run/docker.sock:/var/run/docker.sock
+      - devcontainer-zsh-history:/root/.zsh_history
+      - devcontainer-git-config:/root/.gitconfig
+      - devcontainer-dotfiles:/root/.dotfiles
+    working_dir: /workspaces/project
+    command: sleep infinity
+    tty: true
+    stdin_open: true
+    environment:
+      - SHELL=/bin/zsh
+    network_mode: host
+
+volumes:
+  devcontainer-zsh-history:
+  devcontainer-git-config:
+  devcontainer-dotfiles:

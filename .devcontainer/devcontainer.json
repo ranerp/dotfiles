@@ -2,13 +2,18 @@
     "name": "Development Environment",
     "build": {
         "context": "..",
-        "dockerfile": "Dockerfile",
+        "dockerfile": "Dockerfile"
     },
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+    ],
+    "workspaceFolder": "/workspaces/project",
     "features": {
         "ghcr.io/devcontainers/features/common-utils:2": {
             "installZsh": true,
             "configureZshAsDefaultShell": true
         },
     },
+    "forwardPorts": [3000, 8000, 8080, 9000],
     "postCreateCommand": "git clone https://github.com/ranerp/dotfiles.git ~/.dotfiles && cd ~/.dotfiles && chmod +x install.sh && ./install.sh"
 }
