@@ -112,6 +112,8 @@ plugins=(
     "fzf-zsh-plugin https://github.com/unixorn/fzf-zsh-plugin.git"
     "fzf-tab https://github.com/Aloxaf/fzf-tab"
     "zsh-bat https://github.com/fdellwing/zsh-bat.git"
+    "you-should-use https://github.com/MichaelAquilina/zsh-you-should-use.git"
+    "history-substring-search https://github.com/zsh-users/zsh-history-substring-search.git"
 )
 
 for plugin in "${plugins[@]}"; do

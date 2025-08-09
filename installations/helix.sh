@@ -24,19 +24,11 @@ install_helix() {
     if [ -n "$HELIX_VERSION" ]; then
         cd /tmp || exit
 
-        if [ "$HELIX_OS" = "macos" ]; then
-            wget -q "https://github.com/helix-editor/helix/releases/download/${HELIX_VERSION}/helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}.tar.xz"
-            tar -xf "helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}.tar.xz"
-            sudo mv "helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}" /usr/local/helix
-            sudo ln -sf /usr/local/helix/hx /usr/local/bin/hx
-            rm -f "helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}.tar.xz"
-        else
-            wget -q "https://github.com/helix-editor/helix/releases/download/${HELIX_VERSION}/helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}.tar.xz"
-            tar -xf "helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}.tar.xz"
-            sudo mv "helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}" /usr/local/helix
-            sudo ln -sf /usr/local/helix/hx /usr/local/bin/hx
-            rm -f "helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}.tar.xz"
-        fi
+        wget -q "https://github.com/helix-editor/helix/releases/download/${HELIX_VERSION}/helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}.tar.xz"
+        tar -xf "helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}.tar.xz"
+        sudo mv "helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}" /usr/local/helix
+        sudo ln -sf /usr/local/helix/hx /usr/local/bin/hx
+        rm -f "helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}.tar.xz"
 
         print_success "Helix editor installed (${HELIX_VERSION})"
         print_info "Run 'hx --health' to check language server support"

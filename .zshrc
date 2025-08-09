@@ -20,6 +20,10 @@ plugins=(
     fzf-zsh-plugin  
     fzf-tab
     zsh-bat
+    you-should-use
+    colored-man-pages
+    history-substring-search
+    copypath
 )
 
 # Load Oh My Zsh

@@ -2,7 +2,7 @@
     name = Raner P
 
 [core]
-    editor = vim
+    editor = hx
     autocrlf = input
     excludesfile = ~/.gitignore_global
 
@@ -56,17 +56,17 @@
     status = auto
 
 [color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
+    current = 61 reverse
+    local = 180
+    remote = 114
 
 [color "diff"]
-    meta = yellow bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
+    meta = 240
+    frag = 61
+    old = 204
+    new = 114
 
 [color "status"]
-    added = yellow
-    changed = green
-    untracked = cyan
+    added = 114
+    changed = 180
+    untracked = 39
