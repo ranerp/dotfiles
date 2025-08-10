@@ -44,6 +44,9 @@ declare -A INSTALL_CONFIG=(
     ["fonts"]=true            # powerlevel10k depends on the NerdFonts to render correctly. Same can be said about EZA
 )
 
+# Create local bin directory
+create_local_bin
+
 # Install Oh My Zsh first (required for themes/plugins)
 if [ "${INSTALL_CONFIG["ohmyzsh"]}" = "true" ]; then
     install_ohmyzsh

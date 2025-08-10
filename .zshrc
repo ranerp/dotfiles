@@ -17,7 +17,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     kubectl
-    fzf-zsh-plugin  
+    fzf-zsh-plugin
     fzf-tab
     zsh-bat
     you-should-use

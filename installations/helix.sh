@@ -26,8 +26,8 @@ install_helix() {
 
         wget -q "https://github.com/helix-editor/helix/releases/download/${HELIX_VERSION}/helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}.tar.xz"
         tar -xf "helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}.tar.xz"
-        sudo mv "helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}" /usr/local/helix
-        sudo ln -sf /usr/local/helix/hx /usr/local/bin/hx
+        mv "helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}" "$HOME/.local/helix"
+        ln -sf "$HOME/.local/helix/hx" "$HOME/.local/bin/hx"
         rm -f "helix-${HELIX_VERSION}-${HELIX_ARCH}-${HELIX_OS}.tar.xz"
 
         print_success "Helix editor installed (${HELIX_VERSION})"

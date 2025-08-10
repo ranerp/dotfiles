@@ -2,30 +2,50 @@
 install_eza() {
     print_info "Installing eza (modern ls replacement)..."
 
-    # Detect architecture
-    ARCH=$(uname -m)
-    case $ARCH in
-        x86_64) EZA_ARCH="x86_64" ;;
-        aarch64|arm64) EZA_ARCH="aarch64" ;;
-        *) EZA_ARCH="x86_64" ;;
+    # Detect OS
+    OS=$(uname -s)
+    case $OS in
+        Darwin)
+            # macOS - use brew
+            if command -v brew >/dev/null 2>&1; then
+                brew install eza
+                print_success "eza installed via brew"
+            else
+                print_error "Homebrew not found. Please install Homebrew first."
+                return 1
+            fi
+            ;;
+        Linux)
+            # Detect architecture
+            ARCH=$(uname -m)
+            case $ARCH in
+                x86_64) EZA_ARCH="x86_64" ;;
+                aarch64|arm64) EZA_ARCH="aarch64" ;;
+                *) EZA_ARCH="x86_64" ;;
+            esac
+
+            # Get latest eza release
+            EZA_VERSION=$(curl -s https://api.github.com/repos/eza-community/eza/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+
+            if [ -n "$EZA_VERSION" ]; then
+                cd /tmp || exit
+
+                wget -q "https://github.com/eza-community/eza/releases/download/${EZA_VERSION}/eza_${EZA_ARCH}-unknown-linux-gnu.tar.gz"
+
+                tar -xzf "eza_${EZA_ARCH}-unknown-linux-gnu.tar.gz"
+                mv eza "$HOME/.local/bin/"
+
+                rm -f "eza_${EZA_ARCH}-unknown-linux-gnu.tar.gz"
+                print_success "eza installed (${EZA_VERSION})"
+            else
+                print_error "Failed to get eza version"
+            fi
+            ;;
+        *)
+            print_error "Unsupported OS: $OS"
+            return 1
+            ;;
     esac
-
-    # Get latest eza release
-    EZA_VERSION=$(curl -s https://api.github.com/repos/eza-community/eza/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-
-    if [ -n "$EZA_VERSION" ]; then
-        cd /tmp || exit
-
-        wget -q "https://github.com/eza-community/eza/releases/download/${EZA_VERSION}/eza_${EZA_ARCH}-unknown-linux-gnu.tar.gz"
-
-        tar -xzf "eza_${EZA_ARCH}-unknown-linux-gnu.tar.gz"
-        sudo mv eza /usr/local/bin/
-
-        rm -f "eza_${EZA_ARCH}-unknown-linux-gnu.tar.gz"
-        print_success "eza installed (${EZA_VERSION})"
-    else
-        print_error "Failed to get eza version"
-    fi
 }
 
 # Setup EZA themes

@@ -1,0 +1,64 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vim/
+.netrwhist
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.cache
+.cache/
+
+# System files
+.localized
+.fseventsd
+.DocumentRevisions-V100
+.TemporaryItems
+.VolumeIcon.icns
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Archive files
+*.zip
+*.tar.gz
+*.rar
+
+# Node.js (if any scripts use it)
+node_modules/
+npm-debug.log*
+
+# Python (if any scripts use it)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Secrets and sensitive data
+.env
+.env.local
+.env.production
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
