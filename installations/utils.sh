@@ -15,3 +15,12 @@ print_error() {
 print_info() {
     echo -e "${YELLOW}ℹ${NC} $1"
 }
+
+# Create local bin directory if it doesn't exist
+create_local_bin() {
+    if [ ! -d "$HOME/.local/bin" ]; then
+        print_info "Creating ~/.local/bin directory..."
+        mkdir -p "$HOME/.local/bin"
+        print_success "Created ~/.local/bin directory"
+    fi
+}
