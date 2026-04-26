@@ -32,6 +32,25 @@ for file in "${files[@]}"; do
     fi
 done
 
+# Create symlinks for config directories
+print_info "Setting up config directory symlinks..."
+config_dirs=(".claude/themes" ".obsidian/snippets")
+for dir in "${config_dirs[@]}"; do
+    if [ -d "$DOTFILES_DIR/$dir" ]; then
+        mkdir -p "$HOME/$(dirname "$dir")"
+        create_symlink "$DOTFILES_DIR/$dir" "$HOME/$dir"
+    fi
+done
+
+# Create symlinks for individual config files
+config_files=(".config/zed/settings.json")
+for file in "${config_files[@]}"; do
+    if [ -f "$DOTFILES_DIR/$file" ]; then
+        mkdir -p "$HOME/$(dirname "$file")"
+        create_symlink "$DOTFILES_DIR/$file" "$HOME/$file"
+    fi
+done
+
 # Installation configuration - set to false to disable
 declare -A INSTALL_CONFIG=(
     ["k9s"]=true

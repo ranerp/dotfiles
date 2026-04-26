@@ -1,0 +1,58 @@
+theme = Vesper
+font-family = Monaspace Neon
+font-family = MesloLGS Nerd Font Mono
+font-size = 16
+font-feature = calt
+font-feature = liga
+font-feature = ss01
+font-feature = ss02
+font-feature = ss03
+font-feature = ss04
+font-feature = ss05
+font-feature = ss06
+font-feature = ss07
+font-feature = ss08
+
+# ────────────────────────────────────────────────────────────────────
+# Islands Dark ANSI palette — content-only, keeps Vesper's UI feel
+# ────────────────────────────────────────────────────────────────────
+palette = 0=#43454a
+palette = 1=#f75464
+palette = 2=#6aab73
+palette = 3=#d5b778
+palette = 4=#56a8f5
+palette = 5=#c77dbb
+palette = 6=#42c3d4
+palette = 7=#bcbec4
+palette = 8=#7a7e85
+palette = 9=#fa6675
+palette = 10=#8bb33d
+palette = 11=#e0bb65
+palette = 12=#83acfc
+palette = 13=#e08cd2
+palette = 14=#56c1d6
+palette = 15=#dfe1e5
+# ────────────────────────────────────────────────────────────────────
+
+# Vesper-Blur-inspired colors and atmosphere
+background-opacity = 0.94
+background-blur-radius = 20
+
+# Window styling
+macos-titlebar-style = transparent
+window-padding-x = 14
+window-padding-y = 14
+cursor-style = block
+cursor-style-blink = false
+mouse-hide-while-typing = true
+
+# Smoother scrolling and saner defaults
+scrollback-limit = 100000
+copy-on-select = clipboard
+confirm-close-surface = false
+window-save-state = always
+
+# p10k + Nerd Font - this helps with box drawing
+adjust-cell-height = 10%
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
