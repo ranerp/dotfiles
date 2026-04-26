@@ -41,7 +41,7 @@ install_extra_fonts() {
     case $OS in
         Darwin)
             if command -v brew >/dev/null 2>&1; then
-                brew install --cask font-monaspace monaspace font-ia-writer-mono font-ia-writer-quattro font-fira-code
+                brew install --cask font-monaspace font-ia-writer-mono font-ia-writer-quattro font-fira-code
                 print_success "Extra fonts installed via brew"
             else
                 print_error "Homebrew not found. Please install Homebrew first."
