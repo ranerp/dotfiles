@@ -20,6 +20,9 @@ source "$DOTFILES_DIR/installations/ohmyzsh.sh"
 source "$DOTFILES_DIR/installations/powerlevel10k.sh"
 source "$DOTFILES_DIR/installations/setup-global-gitignore.sh"
 
+ensure_brew
+ensure_wget
+
 print_info "Installing dotfiles from $DOTFILES_DIR"
 
 # Create symlinks for dotfiles
@@ -43,7 +46,7 @@ for dir in "${config_dirs[@]}"; do
 done
 
 # Create symlinks for individual config files
-config_files=(".config/zed/settings.json")
+config_files=(".config/zed/settings.json" ".config/ghostty/config")
 for file in "${config_files[@]}"; do
     if [ -f "$DOTFILES_DIR/$file" ]; then
         mkdir -p "$HOME/$(dirname "$file")"
@@ -61,6 +64,7 @@ declare -A INSTALL_CONFIG=(
     ["ohmyzsh"]=true
     ["powerlevel10k"]=true
     ["fonts"]=true            # powerlevel10k depends on the NerdFonts to render correctly. Same can be said about EZA
+    ["extra_fonts"]=true     # Monaspace, iA Writer Mono/Quattro, Fira Code
 )
 
 # Create local bin directory
@@ -78,6 +82,13 @@ if [ "${INSTALL_CONFIG["fonts"]}" = "true" ]; then
     install_nerd_fonts
 else
     print_info "Skipping Nerd Fonts (disabled)"
+fi
+
+# Install extra fonts (Monaspace, iA Writer, Fira Code)
+if [ "${INSTALL_CONFIG["extra_fonts"]}" = "true" ]; then
+    install_extra_fonts
+else
+    print_info "Skipping extra fonts (disabled)"
 fi
 
 # Install k9s
