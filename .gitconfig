@@ -3,14 +3,27 @@
 
 [core]
     editor = hx
-    autocrlf = input
+	autocrlf = false
     excludesfile = ~/.gitignore_global
+	eol = lf
+	pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    line-numbers = true
+    syntax-theme = base16-256
+    plus-style = "syntax #1a3320"
+    minus-style = "syntax #3d1820"
+
 
 [init]
     defaultBranch = main
 
 [pull]
-    rebase = false
+    rebase = true
 
 [push]
     default = simple
@@ -29,21 +42,21 @@
     ci = commit
     cm = commit -m
     ca = commit -am
-    
+
     # Advanced shortcuts
     unstage = reset HEAD --
     last = log -1 HEAD
     visual = !gitk
-    
+
     # Logs
     lg = log --oneline --decorate --graph
     lga = log --oneline --decorate --graph --all
     ll = log --pretty=format:'%C(yellow)%h%Creset -%C(red)%d%Creset %s %C(bold blue)<%an>%Creset %C(green)(%cr)%Creset' --abbrev-commit
-    
+
     # Show branches
     branches = branch -a
     remotes = remote -v
-    
+
     # Stash shortcuts
     sl = stash list
     sa = stash apply
@@ -56,17 +69,42 @@
     status = auto
 
 [color "branch"]
-    current = 61 reverse
-    local = 180
-    remote = 114
-
+    current = "#c77dbb" reverse
+    local = "#cf8e6d"
+    remote = "#56a8f5"
+    plain = "#bcbec4"
 [color "diff"]
-    meta = 240
-    frag = 61
-    old = 204
-    new = 114
-
+    meta = "#7a7e85"
+    frag = "#c77dbb"
+    func = "#c77dbb"
+    old = "#f75464"
+    new = "#549159"
+    commit = "#cf8e6d"
+    whitespace = "#f75464" reverse
+    context = normal
 [color "status"]
-    added = 114
-    changed = 180
-    untracked = 39
+    added = "#549159"
+    changed = "#cf8e6d"
+    untracked = "#7a7e85"
+    branch = "#c77dbb"
+    nobranch = "#f75464"
+    localBranch = "#cf8e6d"
+    remoteBranch = "#56a8f5"
+    header = normal
+[color "decorate"]
+    branch = "#c77dbb"
+    remoteBranch = "#56a8f5"
+    tag = "#cf8e6d"
+    stash = "#bcbec4"
+    HEAD = "#f75464"
+[color "grep"]
+    match = "#cf8e6d"
+    filename = "#c77dbb"
+    linenumber = "#7a7e85"
+    separator = "#7a7e85"
+    selected = normal
+[color "interactive"]
+    prompt = "#c77dbb"
+    header = "#cf8e6d"
+    help = "#7a7e85"
+    error = "#f75464"

@@ -1,0 +1,193 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "buffer_font_family": "Monaspace Neon",
+  "buffer_font_fallbacks": ["MesloLGS Nerd Font Mono"],
+  "buffer_font_features": {
+    "calt": true,
+    "liga": true,
+    "ss01": true,
+    "ss02": true,
+    "ss03": true,
+    "ss04": true,
+    "ss05": true,
+    "ss06": true,
+    "ss07": true,
+    "ss08": true,
+  },
+  "experimental.theme_overrides": {
+    "background": "#101010d0",
+    // Islands Dark syntax palette on top of Vesper Blur (verified against .icls)
+    "syntax": {
+      // Warm orange — keywords only (NOT operators/tags in Islands Dark)
+      "keyword": { "color": "#cf8e6d" },
+      "keyword.control": { "color": "#cf8e6d" },
+
+      // Default text — operators and tags (Islands Dark leaves these uncolored)
+      "keyword.operator": { "color": "#bcbec4" },
+      "operator": { "color": "#bcbec4" },
+      "tag": { "color": "#bcbec4" },
+
+      // Default text — user-defined types and class references
+      "type": { "color": "#bcbec4" },
+      "constructor": { "color": "#bcbec4" },
+
+      // Dusty gold — built-in types (String, int, Array, number, etc.) and enums
+      "type.builtin": { "color": "#d5b778" },
+      "enum": { "color": "#d5b778" },
+
+      // Bright blue — functions and methods
+      "function": { "color": "#56a8f5" },
+      "function.method": { "color": "#56a8f5" },
+      "function.builtin": { "color": "#56a8f5" },
+
+      // Olive — annotations / decorators (@Hidden, @Override, @app.route)
+      "attribute": { "color": "#b3ae60" },
+
+      // Teal — numbers and booleans (this was the "bright purple" mistake)
+      "number": { "color": "#2aacb8" },
+      "boolean": { "color": "#2aacb8" },
+
+      // Pink-purple — constants and static fields (italic in IntelliJ)
+      "constant": { "color": "#c77dbb", "font_style": "italic" },
+      "constant.builtin": { "color": "#c77dbb", "font_style": "italic" },
+
+      // Default text — plain variables and parameters
+      "variable": { "color": "#bcbec4" },
+      "variable.parameter": { "color": "#bcbec4" },
+
+      // Pink-purple — instance fields / member access (Java/JS this.foo, obj.bar)
+      "variable.member": { "color": "#c77dbb" },
+      "property": { "color": "#c77dbb" },
+
+      // Orange italic — self/this/super (these ARE keywords in IntelliJ)
+      "variable.special": { "color": "#cf8e6d", "font_style": "italic" },
+      "variable.builtin": { "color": "#cf8e6d", "font_style": "italic" },
+
+      // Sage green — strings; orange — escapes (deliberate: escapes need to pop)
+      "string": { "color": "#6aab73" },
+      "string.special": { "color": "#6aab73" },
+      "string.escape": { "color": "#cf8e6d" },
+
+      // Comment grays — line/block plain gray, doc comments sage italic
+      "comment": { "color": "#7a7e85", "font_style": "italic" },
+      "comment.doc": { "color": "#5f826b", "font_style": "italic" },
+
+      // Default text — punctuation
+      "punctuation": { "color": "#bcbec4" },
+      "punctuation.bracket": { "color": "#bcbec4" },
+      "punctuation.delimiter": { "color": "#bcbec4" },
+      "embedded": { "color": "#bcbec4" },
+
+      // Pink — namespaces; cyan — labels and regex
+      "namespace": { "color": "#c77dba" },
+      "label": { "color": "#42c3d4" },
+      "string.regex": { "color": "#42c3d4" },
+
+      // Dim gray — inlay hints
+      "hint": { "color": "#6f737a", "font_style": "italic" },
+
+      // Markdown
+      "title": { "color": "#cf8e6d" },
+      "link_uri": { "color": "#5c92ff" },
+      "link_text": { "color": "#56a8f5" },
+    },
+  },
+  "ui_font_family": "iA Writer Quattro V",
+  "ui_font_weight": 350.0,
+  "terminal": {
+    "font_family": "Monaspace Neon",
+    "font_fallbacks": ["MesloLGL Nerd Font Mono"],
+    "font_size": 15,
+    "line_height": "standard",
+  },
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000,
+    },
+  },
+  "project_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "git_panel": {
+    "dock": "left",
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "format_on_save": "on",
+  "remove_trailing_whitespace_on_save": true,
+  "ensure_final_newline_on_save": true,
+  "cursor_blink": false,
+  "current_line_highlight": "gutter",
+  "show_whitespaces": "selection",
+  "scrollbar": { "show": "never" },
+  "indent_guides": { "enabled": true, "coloring": "indent_aware" },
+  "vim_mode": true,
+  "base_keymap": "JetBrains",
+  "ui_font_size": 15,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Vesper Blur",
+  },
+  "icon_theme": {
+    "mode": "system",
+    "light": "Base Charmed Icons",
+    "dark": "Soft Charmed Icons",
+  },
+  "languages": {
+    "Python": {
+      "language_servers": ["pyright", "ruff"],
+      "formatter": { "language_server": { "name": "ruff" } },
+      "format_on_save": "on",
+    },
+    "TypeScript": {
+      "language_servers": ["typescript-language-server", "eslint"],
+      "format_on_save": "on",
+    },
+  },
+  "git": {
+    "branch_picker": {
+      "show_author_name": true,
+    },
+    "inline_blame": {
+      "show_commit_summary": true,
+    },
+  },
+  "tabs": {
+    "show_diagnostics": "all",
+    "show_close_button": "hover",
+    "close_position": "left",
+    "file_icons": true,
+    "git_status": true,
+  },
+  "title_bar": {
+    "show_branch_status_icon": true,
+    "show_onboarding_banner": true,
+    "show_project_items": true,
+    "show_branch_name": true,
+    "show_menus": false,
+    "show_sign_in": true,
+    "show_user_picture": true,
+  },
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Vesper Island Dark",
+  "base": "dark-daltonized",
+  "overrides": {
+    "claude": "#bcbec4",
+    "claudeShimmer": "#dfe1e5",
+    "text": "#bcbec4",
+    "subtle": "#7a7e85",
+    "inactive": "#545860",
+    "suggestion": "#56a8f5",
+    "success": "#6aab73",
+    "error": "#f75464",
+    "warning": "#e0bb65",
+    "permission": "#cf8e6d",
+    "planMode": "#c77dbb",
+    "diffAdded": "#1a3320",
+    "diffRemoved": "#3d1820",
+    "diffAddedDimmed": "#122418",
+    "diffRemovedDimmed": "#2a1018",
+    "diffAddedWord": "#6aab73",
+    "diffRemovedWord": "#c45a68"
+  }
+}

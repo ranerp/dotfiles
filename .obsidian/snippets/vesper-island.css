@@ -1,0 +1,44 @@
+/* Inline code highlighting — mirrors editor syntax */
+.theme-dark {
+    --code-normal: #bcbec4;
+    --code-keyword: #cf8e6d;
+    --code-function: #56a8f5;
+    --code-string: #6aab73;
+    --code-value: #2aacb8;
+    --code-comment: #7a7e85;
+    --code-property: #c77dbb;
+    --code-tag: #cf8e6d;
+    --code-important: #d5b778;
+    --code-operator: #bcbec4;
+}
+
+/* Headings — neutral hierarchy, only H2 carries the accent */
+.theme-dark .markdown-rendered h1 {
+    color: #dfe1e5;
+}
+.theme-dark .markdown-rendered h2 {
+    color: #c77dbb;
+}
+.theme-dark .markdown-rendered h3 {
+    color: #56a8f5;
+}
+.theme-dark .markdown-rendered h4,
+.theme-dark .markdown-rendered h5,
+.theme-dark .markdown-rendered h6 {
+    color: #bcbec4;
+}
+
+/* Internal links in accent pink-purple, external in blue */
+.theme-dark a.internal-link {
+    color: #c77dbb;
+}
+.theme-dark a.external-link {
+    color: #56a8f5;
+}
+
+/* Tags — orange outline, transparent fill */
+.theme-dark .tag {
+    color: #cf8e6d;
+    background: transparent;
+    border: 1px solid #cf8e6d40;
+}
